@@ -1,6 +1,8 @@
 import datetime
+import os
 import gspread
 import requests
+from dotenv import load_dotenv
 
 from rest_framework import generics
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -11,6 +13,10 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
 from exchange_rate.serializers import UserSerializer
+
+load_dotenv()
+
+SHEET_ID = os.environ.get("SHEET_ID")
 
 
 def format_date(date_str):
@@ -43,7 +49,7 @@ def record_exchange_rate_to_excel(request):
     update_to = request.GET.get('update_to', current_date)
 
     gc = gspread.service_account(filename="credentials.json")
-    sh = gc.open_by_key('1ygIgXm9FZ7tXLKtfhJGubnLIIPlJ0pmpWsnv0iBQIic')
+    sh = gc.open_by_key(SHEET_ID)
     worksheet = sh.worksheet("exchange_rate")
 
     rates = get_rate(update_to, update_from)
