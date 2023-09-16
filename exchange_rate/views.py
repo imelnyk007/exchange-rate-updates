@@ -4,7 +4,6 @@ import gspread
 import requests
 from dotenv import load_dotenv
 
-from rest_framework import generics
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -12,7 +11,6 @@ from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
-from exchange_rate.serializers import UserSerializer
 
 load_dotenv()
 
@@ -68,10 +66,6 @@ def record_exchange_rate_to_excel(request):
         worksheet.update(cell_range, [rate_data])
 
     return Response({'message': 'Data updated in Excel'})
-
-
-class UserCreateView(generics.CreateAPIView):
-    serializer_class = UserSerializer
 
 
 class TokenCreateView(ObtainAuthToken):
