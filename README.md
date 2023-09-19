@@ -30,25 +30,26 @@ git clone https://github.com/imelnyk007/exchange-rate-updates.git
 ```bash
 cd exchange-rate-updates
 ```
-2. Create a virtual environment:
+3. Create an .env file and define the environment variables using .env.sample.
+4. Create a virtual environment:
 ```bash
 python -m venv venv
 venv\Scripts\activate (on Windows)
 source venv/bin/activate (on macOS)
 ```
-3. Install requirements:
+5. Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
-4. Perform the migration:
+6. Perform the migration:
 ```bash
 python manage.py migrate
 ```
-5. Create a superuser:
+7. Create a superuser:
 ```bash
 python manage.py createsuperuser
 ```
-6. Start the server:
+8. Start the server:
 ```bash
 python manage.py runserver
 ```
